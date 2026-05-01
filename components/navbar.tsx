@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import ButtonGenevision from "./buttonGenevision";
 import { PopupModal } from "react-calendly";
+import Image from 'next/image'
 
-export default function Navbar() {
+export default function Navbar({ openNavMenu, setOpenNavMenu }: { openNavMenu: boolean; setOpenNavMenu: React.Dispatch<React.SetStateAction<boolean>> }) {
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [open, setOpen] = useState(false);
@@ -58,9 +59,16 @@ export default function Navbar() {
                 <ButtonGenevision
                     title="audit gratuit 15 min"
                     onClick={() => setOpen(true)}
-                    className="bg-[#E63946] text-white px-5 py-2 rounded-xl font-medium hover:bg-[#A0151F] hover:cursor-pointer"
+                    className="bg-[#E63946] hidden md:flex text-white px-5 py-2 rounded-xl font-medium hover:bg-[#A0151F] hover:cursor-pointer"
                 />
-
+                <button onClick={() => setOpenNavMenu(!openNavMenu)} className="md:hidden">
+                    <Image
+                        src="/burger-menu-svgrepo-com.svg"
+                        width={30}
+                        height={30}
+                        alt="menu"
+                    />
+                </button>
                 {root && (
                     <PopupModal
                         url="https://calendly.com/dayesowendev/new-meeting"
